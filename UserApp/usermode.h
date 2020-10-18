@@ -1,0 +1,4 @@
+#pragma once
+
+#define STATUS_SUCCESS 0x00000000L
+#define STATUS_FAILURE 0x00000001L

@@ -145,10 +145,12 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Driver.c" />
+    <ClCompile Include="driver.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbgmsg.h" />
+    <ClInclude Include="driver.h" />
+    <ClInclude Include="shared.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

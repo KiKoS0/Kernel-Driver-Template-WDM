@@ -1,20 +1,16 @@
-#include "ntddk.h"
 #include "dbgmsg.h"
 #include <wdm.h>
-#include <ntddk.h>
+#include "ntddk.h"
+#include "driver.h"
 
 // Not good but whatever
 //#pragma warning(disable:4101)
 //#pragma warning(disable:4100)
 
-#define FILE_DEVICE_RK 0x00008001
 
-#define IOCTL_TEST_CMD \
-	CTL_CODE(FILE_DEVICE_RK,0x801,METHOD_BUFFERED,FILE_READ_DATA | FILE_WRITE_DATA)
 
 PDRIVER_OBJECT DriverObjectRef;
-const WCHAR DeviceNameBuffer[] = L"\\Device\\msnetdiag";
-const WCHAR DeviceLinkBuffer[] = L"\\DosDevices\\msnetdiag";
+
 
 PDEVICE_OBJECT MSNetDiagDeviceObject;
 

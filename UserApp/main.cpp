@@ -6,6 +6,7 @@
 
 
 int setDeviceHandle(HANDLE*);
+int TestOperation(HANDLE);
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
 
 	retCode = setDeviceHandle(&hDeviceFile);
 	if (retCode != STATUS_SUCCESS) { return(retCode); }
-	//retCode = TestOperation(hDeviceFile);
+	retCode = TestOperation(hDeviceFile);
 	if (retCode != STATUS_SUCCESS) { return(retCode); }
 
 	CloseHandle(hDeviceFile);
@@ -24,8 +25,8 @@ int setDeviceHandle(HANDLE *pHandle)
 {
 	printf("[setDeviceHandle] Opening handle to %s\n", UserlandPath);
 
-	*pHandle = CreateFile(
-		reinterpret_cast<LPCWSTR>(UserlandPath),
+	*pHandle = CreateFileA(
+		UserlandPath,
 		GENERIC_READ | GENERIC_WRITE,
 		0,
 		nullptr,
@@ -39,7 +40,7 @@ int setDeviceHandle(HANDLE *pHandle)
 		return STATUS_FAILURE;
 	}
 
-	printf("[setDeviceHandle] device file handle acquired");
+	printf("[setDeviceHandle] device file handle acquired\n");
 	return STATUS_SUCCESS;
 
 	
@@ -54,13 +55,19 @@ int TestOperation(HANDLE hDeviceFile)
 	
 	char* inBuffer = static_cast<char*>(malloc(nBufferSize));
 	char* outBuffer = static_cast<char*>(malloc(nBufferSize));
+
 	if ((inBuffer == nullptr) || (outBuffer == nullptr))
 	{
 		printf("[TestOperation] malloc failed");
 		return(STATUS_FAILURE);
 	}
-	sprintf_s(inBuffer, nBufferSize, "This is the input buffer");
-	sprintf_s(outBuffer, nBufferSize, "This is the output buffer");
+	ZeroMemory(inBuffer, nBufferSize);
+	ZeroMemory(outBuffer, nBufferSize);
+	const char inStr[] = "This is the input buffer";
+	const char outStr[] = "This is the output buffer";
+	
+	sprintf_s(inBuffer, sizeof(inStr), inStr);
+	sprintf_s(outBuffer, sizeof(outStr), outStr);
 
 	opStatus = DeviceIoControl(
 		hDeviceFile,

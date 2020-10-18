@@ -32,6 +32,7 @@ NTSTATUS RegisterDriverDeviceName(IN PDRIVER_OBJECT DriverObject)
 
 NTSTATUS RegisterDriverDeviceLink(IN PDRIVER_OBJECT DriverObject)
 {
+	UNREFERENCED_PARAMETER(DriverObject);
 	NTSTATUS ntStatus;
 	UNICODE_STRING unicodeString;
 	UNICODE_STRING unicodeLinkString;

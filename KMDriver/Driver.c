@@ -10,8 +10,6 @@
 
 
 PDRIVER_OBJECT DriverObjectRef;
-
-
 PDEVICE_OBJECT MSNetDiagDeviceObject;
 
 NTSTATUS RegisterDriverDeviceName(IN PDRIVER_OBJECT DriverObject)

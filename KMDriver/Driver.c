@@ -144,6 +144,7 @@ NTSTATUS dispatchIOControl(IN PDEVICE_OBJECT DeviceObject, IN PIRP IRP)
 	ULONG ioctrlcode;
 	NTSTATUS ntStatus;
 
+	SyncHack();
 
 	ntStatus = STATUS_SUCCESS;
 
